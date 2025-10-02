@@ -1,3 +1,6 @@
-A or B = Not(Not(A) and Not(B))
-A Xor B = (A and not B) or (not A and B)
-Mux = (a and not sel) or (b and sel)
+1. A or B = Not(Not(A) and Not(B))
+
+2. 迪摩根定理
+    * A Xor B = (A and not B) or (not A and B)
+    * Mux = (a and not sel) or (b and sel)
+
