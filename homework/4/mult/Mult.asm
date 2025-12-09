@@ -8,3 +8,44 @@
 // The algorithm is based on repetitive addition.
 
 //// Replace this comment with your code.
+
+@2	//Anser
+M=0	//ZERO ANS
+
+@0
+D=M
+@END
+D;JEQ	//if R0 == 0 --> skip
+
+@1
+D=M
+@END
+D;JEQ	//if R1 == 0 --> skip
+
+
+// R3 = R1 (counter)
+@1
+D=M
+@3
+M=D
+
+
+(LOOP)
+// R2 = R2 + R0
+@0
+D=M
+@2
+M=M+D
+
+// counter - 1
+@3
+M=M-1
+
+// if counter > 0, continue loop
+D=M
+@LOOP
+D;JGT
+
+(END)
+@END
+0;JMP
