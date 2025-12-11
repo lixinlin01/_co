@@ -12,7 +12,8 @@ CHIP And {
     
     PARTS:
     //// Replace this comment with your code.
+
+    // 對 NAND 的輸出進行反相 (NOT) 運算
     Nand(a=a, b=b, out=out1);
     Not(in=out1, out=out);
-
 }

@@ -12,5 +12,8 @@ CHIP Not {
 
     PARTS:
     //// Replace this comment with your code.
+    
+
+    // 將 NAND 閘的兩個輸入連接 in，實現 NOT 閘。
     Nand(a=in, b=in, out=out);
 }
