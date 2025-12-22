@@ -15,9 +15,12 @@ CHIP Mux4Way16 {
     
     PARTS:
     //// Replace this comment with your code.
+
+    // 第一層：利用 sel[0] 分別在 (a,b) 與 (c,d) 之間各選出一個
     Mux16(a=a, b=b, sel=sel[0], out=out1);
 
     Mux16(a=c, b=d, sel=sel[0], out=out2);
 
+    // 第二層：若 sel[1]=0 則選第一組 (a 或 b)，若 sel[1]=1 則選第二組 (c 或 d)
     Mux16(a=out1, b=out2, sel=sel[1], out=out);
 }

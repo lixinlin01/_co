@@ -12,9 +12,14 @@ CHIP Mux {
 
     PARTS:
     //// Replace this comment with your code.
+
+    // 根據選擇訊號 sel 的值，將輸入 a 或 b 導向輸出 out。
     Not(in=sel, out=notsel);
-    And(a=a, b=notsel, out=aAndnsel);
-    And(a=b, b=sel, out=bAndsel);
-    Or(a=aAndnsel, b=bAndsel, out=out);
+
+    // 當 sel=0 (即 notsel=1) 時，才允許 a 通過，Asel = a；當 sel=1 時， B 通過，Bsel = b。
+    And(a=a, b=notsel, out=Asel);
+    And(a=b, b=sel, out=Bsel);
+
+    Or(a=Asel, b=Bsel, out=out);
 
 }

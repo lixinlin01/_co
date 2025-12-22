@@ -13,6 +13,8 @@ CHIP Not16 {
 
     PARTS:
     //// Replace this comment with your code.
+
+    // 使用 16 個 Not 閘，對輸入in 進行運算
     Not(in=in[0], out=out[0]);
     Not(in=in[1], out=out[1]);
     Not(in=in[2], out=out[2]);

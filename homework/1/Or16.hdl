@@ -13,6 +13,8 @@ CHIP Or16 {
 
     PARTS:
     //// Replace this comment with your code.
+
+    // 使用 16 個 And 閘，對輸入 a 和 b 進行運算。
     Or(a=a[0], b=b[0], out=out[0]);
     Or(a=a[1], b=b[1], out=out[1]);
     Or(a=a[2], b=b[2], out=out[2]);

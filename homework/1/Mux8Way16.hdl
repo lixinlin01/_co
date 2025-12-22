@@ -21,9 +21,12 @@ CHIP Mux8Way16 {
 
     PARTS:
     //// Replace this comment with your code.
+    // 從 a、b、c、d 中擇 1
     Mux4Way16(a=a, b=b, c=c, d=d, sel=sel[0..1], out=out1);
     
+    // 從 e、f、g、h 中擇 1
     Mux4Way16(a=e, b=f, c=g, d=h, sel=sel[0..1], out=out2);
 
+    // 若 sel[2]=0 則選第一組 (a 或 b 或 c 或 d)，若 sel[2]=1 則選第二組 (e 或 f 或 g 或 h)
     Mux16(a=out1, b=out2, sel=sel[2], out=out);
 }
