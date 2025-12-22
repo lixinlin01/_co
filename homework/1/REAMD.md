@@ -109,3 +109,25 @@
 
 <img width="400" height="400" alt="Mux8Way16" src="https://github.com/user-attachments/assets/ac89cada-5839-4f27-a579-ffbede7df7d8" />
 
+---
+## 13. DMux (原創)
+根據 sel 的狀態，將 in 導向輸出端 a 或 b。
+
+**13.1 DMux 電路圖**
+
+<img width="300" height="200" alt="螢幕擷取畫面 2025-12-22 204845" src="https://github.com/user-attachments/assets/32e8b90e-7347-4697-8f86-e72b25174484" />
+
+---
+## 14. DMux4Way (原創)
+根據 sel，將 in 導向其中一個輸出端，其他為 0。
+
+**14.1 DMux4Way 電路圖**
+
+<img width="400" height="400" alt="螢幕擷取畫面 2025-12-22 211208" src="https://github.com/user-attachments/assets/5a497e28-d110-402e-a535-4c63d5115bc0" />
+
+---
+## 15. DMux8Way (原創)
+**DMux8Way 電路圖**
+
+<img width="350" height="400" alt="螢幕擷取畫面 2025-12-22 212322" src="https://github.com/user-attachments/assets/0632e539-16ca-4213-ab8d-3ebb2b2783c4" />
+
