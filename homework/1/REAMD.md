@@ -63,7 +63,7 @@
 <img width="500" height="300" alt="Or8way" src="https://github.com/user-attachments/assets/d7a4caf4-830d-4b6a-8b9b-45b6fba3efda" />
 
 ---
-## 8. Xor 閘
+## 8. Xor 閘 (原創)
 當兩個輸入 a 和 b 的值不同時，輸出 out 才為 1, else out =0。
 
 **8.1 Xor 電路圖**
@@ -79,6 +79,7 @@
 | 1 | 1 | 0 | 0 | 0 | 0 | 0 |
 | 1 | 0 | 0 | 1 | 1 | 0 | 1 |
 
+---
 ## 9. Mux 閘 (原創)
 根據選擇訊號 sel 的值，將輸入 a 或 b 導向輸出 out  
 --> if (sel = 0) out = a,  else out = b
@@ -87,9 +88,24 @@
 
 <img width="500" height="250" alt="螢幕擷取畫面 2025-12-11 144422" src="https://github.com/user-attachments/assets/b4f99701-6b3a-40c8-a612-79a056c21d59" />
 
+---
 ## 10. Mux16 (原創)
 使用 16 個 Mux 閘，對輸入 a 和 b 進行運算。
 
+---
 ## 11. Mux4Way16 (原創)
+根據 sel 從 4 個輸入中輸出其中 1 個 。
+以 101 為例，sel[0] = 右邊的 1，sel[1] = 0，sel[2] = 左邊的 1 。
 
+**11.1 Mux4Way16 電路圖**
+
+<img width="400" height="400" alt="Mux4Way16" src="https://github.com/user-attachments/assets/458e85ba-42d1-43fd-a701-2a10bb2284e1" />
+
+---
+## 12. Mux8Way16 (原創)
+根據 sel 從 8 個輸入中輸出其中 1 個
+
+**12.1 Mux8Way16 電路圖**
+
+<img width="400" height="400" alt="Mux8Way16" src="https://github.com/user-attachments/assets/ac89cada-5839-4f27-a579-ffbede7df7d8" />
 
