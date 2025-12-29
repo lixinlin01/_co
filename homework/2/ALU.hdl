@@ -42,12 +42,13 @@ CHIP ALU {
 
     PARTS:
     //// Replace this comment with your code.
-    // zx, nx
+
+    // zx, nx , 先判斷是否將 x 變成 0 , 再判斷是否反向 x 。
     Mux16(a=x, b=false, sel=zx, out=zerox); 
     Not16(in=zerox, out=notx);
     Mux16(a=zerox, b=notx, sel=nx, out=xbar); 
-    
-    // zy , ny
+
+    // zy, ny , 先判斷是否將 y 變成 0 , 再判斷是否反向 y 。
     Mux16(a=y, b=false, sel=zy, out=zeroy);
     Not16(in=zeroy, out=noty);
     Mux16(a=zeroy, b=noty, sel=ny, out=ybar);
@@ -57,14 +58,14 @@ CHIP ALU {
     And16(a=xbar, b=ybar, out=XandY); 
     Mux16(a=XandY, b=XplusY, sel=f, out=fout);
     
-    // no
+    // no, 反向 fout ?
     Not16(in=fout, out=fnotout);
     Mux16(a=fout, b=fnotout, sel=no, out=out, out[0..7]=flag1, out[8..15]=flag2, out[15]=forNg);
     
-    // ng
+    // ng, if (out < 0)  equals 1, else 0
     And(a=forNg, b=true, out=ng); 
     
-    // zr
+    // zr, if (out == 0) equals 1, else 0 , 使用 Or8Way 以及 Or 判斷 16-bit 上下部分是否為 0 , 最後反向。
     Or8Way(in=flag1, out=OrLow);
     Or8Way(in=flag2, out=OrHigh);
     Or(a=OrLow, b=OrHigh, out=ifZero); 

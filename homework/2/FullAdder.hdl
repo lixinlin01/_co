@@ -12,7 +12,11 @@ CHIP FullAdder {
 
     PARTS:
     //// Replace this comment with your code.
+
+    // 相加前兩個位元，將 s1 與第三個位元相加
     HalfAdder(a=a, b=b, sum=s1, carry=c1);
     HalfAdder(a=s1, b=c, sum=sum, carry=c2);
+
+    // 決定最終進位：[c1 = 1 , c2 = 0] 、 [c1 = 0 , c2 = 1] 、 [c1 = 0 , c2 = 0]。
     Or(a=c1, b=c2, out=carry);
 }
