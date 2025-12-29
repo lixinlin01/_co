@@ -14,6 +14,8 @@ CHIP Register {
 
     PARTS:
     //// Replace this comment with your code.
+
+	# 16 個 bit 組成
     Bit(in=in[0],load=load,out=out[0]);
 	Bit(in=in[1],load=load,out=out[1]);
 	Bit(in=in[2],load=load,out=out[2]);

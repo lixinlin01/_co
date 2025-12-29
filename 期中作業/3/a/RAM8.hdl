@@ -14,6 +14,8 @@ CHIP RAM8 {
 
     PARTS:
     //// Replace this comment with your code.
+
+    // 8 個暫存器取 1
     DMux8Way(in=load, sel=address, a=loada, b=loadb, c=loadc, d=loadd, e=loade, f=loadf, g=loadg, h=loadh);
 
     Register(in=in, load=loada, out=outa);
@@ -25,5 +27,6 @@ CHIP RAM8 {
     Register(in=in, load=loadg, out=outg);
     Register(in=in, load=loadh, out=outh);
     
+    // 輸出
     Mux8Way16(a=outa, b=outb, c=outc, d=outd, e=oute, f=outf, g=outg, h=outh, sel=address, out=out);
 }

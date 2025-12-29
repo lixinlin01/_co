@@ -14,6 +14,10 @@ CHIP Bit {
 
     PARTS:
     //// Replace this comment with your code.
-    Mux(a=DFFout,b=in,sel=load,out=Muxout);
-    DFF(in=Muxout,out=out,out=DFFout);
+    
+    // 選擇器：如果 load=1 選 in，否則選回授值(dffOut)
+    Mux(a=dffOut, b=in, sel=load, out=muxOut);
+    
+    // 儲存單元：接收 Mux 的結果，輸出到外部 out，同時回授給 dffOut
+    DFF(in=muxOut, out=out, out=dffOut);
 }

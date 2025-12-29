@@ -14,6 +14,8 @@ CHIP RAM512 {
 
     PARTS:
     //// Replace this comment with your code.
+
+    // 512 個暫存器
     DMux8Way(in=load, sel=address[6..8], a=sel1, b=sel2, c=sel3, d=sel4, e=sel5, f=sel6, g=sel7, h=sel8);
     
     RAM64(in=in, load=sel1, address=address[0..5], out=r1);

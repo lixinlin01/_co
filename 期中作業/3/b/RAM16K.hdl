@@ -14,6 +14,8 @@ CHIP RAM16K {
 
     PARTS:
     //// Replace this comment with your code.
+
+    // 16K 個暫存器
     DMux4Way(in=load, sel=address[12..13], a=sel1, b=sel2, c=sel3, d=sel4);
 
     RAM4K(in=in, load=sel1, address=address[0..11], out=r1);
