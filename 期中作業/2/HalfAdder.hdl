@@ -1,0 +1,20 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/2/HalfAdder.hdl
+/**
+ * Computes the sum of two bits.
+ */
+CHIP HalfAdder {
+    IN a, b;    // 1-bit inputs
+    OUT sum,    // Right bit of a + b 
+        carry;  // Left bit of a + b
+
+    PARTS:
+    //// Replace this comment with your code.Sum (總和位元)：
+
+    // a 和 b 不同時，Sum 才是 1 (XOR 閘)。 當 a 和 b 同時為 1 時，才會產生進位 (AND 閘)。
+    Xor(a=a, b=b, out=sum);
+    And(a=a, b=b, out=carry);
+
+}
