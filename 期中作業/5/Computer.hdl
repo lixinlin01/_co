@@ -19,4 +19,14 @@ CHIP Computer {
 
     PARTS:
     //// Replace this comment with your code.
+
+    // 讀取目前的指令
+    ROM32K(address=pc, out=instruction);
+
+    // CPU 執行指令
+    CPU(inM=memOut, instruction=instruction, reset=reset, 
+        outM=outM, writeM=writeM, addressM=addressM, pc=pc);
+
+    // 記憶體存取
+    Memory(in=outM, load=writeM, address=addressM, out=memOut);
 }

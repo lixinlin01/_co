@@ -33,4 +33,53 @@ CHIP CPU {
 
     PARTS:
 	//// Replace this comment with your code.
+
+    // 1. 指令解碼
+    // 是否為 C-instruction
+    Not(in=instruction[15], out=isAInst);
+    Not(in=isAInst, out=isCInst);
+
+    // 2. A 暫存器邏輯
+    // 如果是 A 指令，或 C 指令且 dest 位元包含 A (instruction[5])
+    And(a=isCInst, b=instruction[5], out=ALUtoA);
+    Mux16(a=instruction, b=ALUout, sel=ALUtoA, out=Ain);
+    Or(a=isAInst, b=ALUtoA, out=loadA);
+    ARegister(in=Ain, load=loadA, out=Aout, addressM=addressM);
+
+    // 3. 選擇 ALU 的輸入 (A 還是 Memory)
+    Mux16(a=Aout, b=inM, sel=instruction[12], out=AMout);
+
+    // 4. D 暫存器邏輯
+    // 僅在 C 指令且 dest 位元包含 D (instruction[4]) 時載入
+    And(a=isCInst, b=instruction[4], out=loadD);
+    DRegister(in=ALUout, load=loadD, out=Dout);
+
+    // 5. ALU 運算
+    ALU(x=Dout, y=AMout, 
+        zx=instruction[11], nx=instruction[10], 
+        zy=instruction[9], ny=instruction[8], 
+        f=instruction[7], no=instruction[6], 
+        out=ALUout, out=outM, zr=zr, ng=ng);
+
+    // 6. 輸出 writeM
+    And(a=isCInst, b=instruction[3], out=writeM);
+
+    // 7. 跳躍邏輯 (PC 控制)
+    // 判斷 ALU 輸出狀態
+    Not(in=zr, out=notZr);
+    Not(in=ng, out=notNg);
+    And(a=notZr, b=notNg, out=pos); // Positive and non-zero
+
+    And(a=instruction[0], b=pos, out=jgt); // JGT
+    And(a=instruction[1], b=zr,  out=jeq); // JEQ
+    And(a=instruction[2], b=ng,  out=jlt); // JLT
+
+    Or(a=jgt, b=jeq, out=jge);
+    Or(a=jge, b=jlt, out=jumpCond);
+    
+    // 只有在 C 指令時才執行跳躍
+    And(a=isCInst, b=jumpCond, out=pcLoad);
+    Not(in=pcLoad, out=pcInc);
+
+    PC(in=Aout, load=pcLoad, inc=pcInc, reset=reset, out[0..14]=pc);
 }

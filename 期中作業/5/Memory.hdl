@@ -26,4 +26,20 @@ CHIP Memory {
 
     PARTS:
 	//// Replace this comment with your code.
+    
+    // 根據 address[13..14] 判斷要寫入哪個區塊
+    // 00, 01 -> RAM16K
+    // 10     -> Screen
+    // 11     -> Keyboard (不可寫入)
+    DMux4Way(in=load, sel=address[13..14], a=loadRAM1, b=loadRAM2, c=loadScreen, d=loadKbd);
+    
+    // 將前兩個 8K 合併為 16K RAM 的 load 信號
+    Or(a=loadRAM1, b=loadRAM2, out=loadRAM);
+
+    RAM16K(in=in, load=loadRAM, address=address[0..13], out=outRAM);
+    Screen(in=in, load=loadScreen, address=address[0..12], out=outScreen);
+    Keyboard(out=outKbd);
+
+    // 根據位址選擇輸出哪一個組件的值
+    Mux4Way16(a=outRAM, b=outRAM, c=outScreen, d=outKbd, sel=address[13..14], out=out);
 }
