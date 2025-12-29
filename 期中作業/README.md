@@ -238,7 +238,7 @@ Address: 14 個位元。
 略.....。
 
 # 第五章 (參考AI)
-參考網址:https://gemini.google.com/share/3b5259da6692
+參考網址:https://gemini.google.com/share/44f01a845df1
 
 ## 1. memory 
 Memory 晶片負責管理整個 32K 的位址空間。它的結構包含：  
