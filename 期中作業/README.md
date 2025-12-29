@@ -170,7 +170,7 @@ Carry (進位位元)：當 a 和 b 同時為 1 時。是 AND 閘的功能。
 <img width="500" height="150" alt="螢幕擷取畫面 2025-12-29 114147" src="https://github.com/user-attachments/assets/c683a52e-3202-4ef5-9d2a-193cab592b76" />
 
 ---
-## 5. ALU (參考)
+## 5. ALU (參考同學)
 參考連結：https://github.com/Nickh2k6/_co/blob/main/homework/2/ALU.hdl  
 
 ALU 的控制位元功能：
@@ -187,7 +187,7 @@ ALU 的控制位元功能：
 <img width="500" height="300" alt="image" src="https://github.com/user-attachments/assets/ced31897-56d5-4e1c-9a6a-8e1a514f89f3" />
 
 # 第三章
-## 1. bit (參考)
+## 1. bit (參考同學)
 參考連結:https://github.com/Luo051227/_co/blob/main/%E6%9C%9F%E4%B8%AD/3/Bit
 
 由一個 DFF (Data Flip-Flop，資料正反器) 和一個 Mux (多工器) 組成。  
@@ -232,8 +232,48 @@ Address: 12 個位元。
 16K個 16-bit 暫存器。  
 Address: 14 個位元。  
 
-# 第四章
+# 第四章 (原創)
+
 使用組合語言  
 略.....。
 
-# 第五章
+# 第五章 (參考AI)
+參考網址:https://gemini.google.com/share/3b5259da6692
+
+## 1. memory 
+Memory 晶片負責管理整個 32K 的位址空間。它的結構包含：  
+- RAM16K: 位址 0 到 16383 (0x0000 - 0x3FFF)
+- Screen: 位址 16384 到 24575 (0x4000 - 0x5FFF)
+- Keyboard: 位址 24576 (0x6000)
+
+根據 address[13..14] 判斷要寫入哪個區塊：
+
+    00, 01 -> RAM16K  
+    10     -> Screen  
+    11     -> Keyboard (不可寫入)  
+
+Mux: out 輸出（決定輸出 RAM 的值、Screen 的值還是 Keyboard 的值)。
+
+---
+## 2. CPU
+核心組成：  
+1. A 暫存器 (Address Register): 存儲數值或位址。
+2. D 暫存器 (Data Register): 存儲運算數據。
+3. ALU: 執行算術運算。
+4. PC (Program Counter): 決定下一個指令的位址。
+
+指令解碼 (C-Instruction: 111 a cccccc ddd jjj)  
+- instruction[15]: 0 為 A 指令，1 為 C 指令。
+- instruction[12] (a): 決定 ALU 的輸入是 A 暫存器還是來自 Memory (inM)。
+- instruction[6..11] (c): 控制 ALU 的功能。
+- instruction[3..5] (d): 決定結果存入何處 (A, D, 或 Memory)。
+- instruction[0..2] (j): 決定跳躍條件（Jump）。
+
+---
+## 3. Computer
+這是最頂層的封裝，將 CPU、Memory 與唯讀記憶體（ROM）連接在一起。
+
+邏輯設計：
+- ROM32K: 儲存程式碼。它的 address 由 CPU 的 pc 決定。
+- CPU: 處理資料與指令。
+- Memory: 提供資料讀寫與輸出入接口。
