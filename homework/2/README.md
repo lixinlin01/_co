@@ -36,7 +36,8 @@ Carry (進位位元)：當 a 和 b 同時為 1 時。是 AND 閘的功能。
 
 ---
 ## 5. ALU (參考)
-參考連結：https://github.com/Nickh2k6/_co/blob/main/homework/2/ALU.hdl
+參考連結：https://github.com/Nickh2k6/_co/blob/main/homework/2/ALU.hdl  
+
 ALU 的控制位元功能：
 - zx: 若為 1，將 x 輸入歸零。
 - nx: 若為 1，將 x 輸入取反。
