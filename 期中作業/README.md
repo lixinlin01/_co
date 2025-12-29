@@ -185,3 +185,52 @@ ALU 的控制位元功能：
 
 ### 5.1 ALU 電路圖
 <img width="500" height="300" alt="image" src="https://github.com/user-attachments/assets/ced31897-56d5-4e1c-9a6a-8e1a514f89f3" />
+
+# 第三章
+## 1. bit (參考)
+參考連結:https://github.com/Luo051227/_co/blob/main/%E6%9C%9F%E4%B8%AD/3/Bit
+
+由一個 DFF (Data Flip-Flop，資料正反器) 和一個 Mux (多工器) 組成。  
+`load = 1 時，寫入新值`  
+`load = 0 時，Mux 會將 DFF 的輸出拉回輸入，形成迴圈，保持舊值不變`
+
+---
+## 2. Register (原創)
+16 個 Bit 並排組成
+
+---
+## 3. PC (原創)
+順序：
+1. Reset： 若 reset = 1，PC 歸零。  
+2. Load： 若 load = 1，PC 被設為輸入值。  
+3. Inc： 若 inc = 1，PC 值加 1 。     
+4. 若以上皆非，保持原值。
+
+---
+## 4. RAM8 (原創)
+8 個 16-bit 暫存器。  
+Address： 3 個位元，範圍是 000 到 111。    
+DMux8Way、Mux8Way16:將輸入導入正確的暫存器並輸出。  
+
+---
+## 5. RAM64 (原創)
+64 個 16-bit 暫存器。  
+Address: 6 個位元。  
+
+---
+## 6. RAM512 (原創)
+512 個 16-bit 暫存器。  
+Address: 9 個位元。 
+
+---
+## 7. RAM4K (原創)
+4K 個 16-bit 暫存器。  
+Address: 12 個位元。  
+
+---
+## 8. RAM16K (原創)
+16K個 16-bit 暫存器。  
+Address: 14 個位元。  
+
+# 第四章
+
