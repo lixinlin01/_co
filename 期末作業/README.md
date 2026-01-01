@@ -342,6 +342,10 @@ Hack 平台提供了一組類似作業系統 (OS) 的 API 供我們使用。在�
 ---
 ## 第10章
 
+**作業連結：** [第十章](https://github.com/lixinlin01/_co/tree/main/%E6%9C%9F%E6%9C%AB%E4%BD%9C%E6%A5%AD/9)
+**習題完成狀態：** 使用 jackCompiler
+**理解程度：** 部分理解 
+
 ### 1. 核心概念 (Overview)
 這是兩階段編譯器的第一階段。
 * **輸入**: `.jack` 原始碼檔案。
