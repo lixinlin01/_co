@@ -80,10 +80,14 @@ Hack 語言支援三種符號，組譯器需透過**符號表 (Symbol Table)** �
   - `static`：處理同一個檔內共享的靜態變數。
   - `temp `：提供 8 個固定的臨時變數空間。
   - `pointer`：用於存取 this 或 that 的基礎位址。
+---
+## 第八章
 
-# 第8章
+**作業連結：** [第八章](https://github.com/lixinlin01/_co/tree/main/%E6%9C%9F%E6%9C%AB%E4%BD%9C%E6%A5%AD/8)  
+**習題完成狀態：** 複製老師答案  
+**理解程度：** 部分理解 
 
-## 1. 核心概念 (Overview)
+### 1. 核心概念 (Overview)
 第八章擴充了 VM Translator 的功能，使其能夠處理完整的應用程式邏輯。
 主要新增兩大功能：
 1.  **程式流程控制 (Program Flow)**: `label`, `goto`, `if-goto` (分支與迴圈)。
@@ -91,17 +95,17 @@ Hack 語言支援三種符號，組譯器需透過**符號表 (Symbol Table)** �
 
 ---
 
-## 2. 程式流程控制 (Program Flow)
+### 2. 程式流程控制 (Program Flow)
 VM 語言支援無條件跳轉和條件跳轉。
 
-### A. Label (標籤)
+**A. Label (標籤)**   
 * **VM 指令**: `label labelName`
 * **功能**: 標記當前程式碼的位置，供跳轉使用。
 * **實作細節**:
     * 翻譯成 Assembly 的 `(labelName)`。
     * **命名空間 (Scope)**: 為了避免不同函式中的 `loop` 標籤衝突，建議將 Label 命名為 `FunctionName$LabelName`。
 
-### B. Goto (無條件跳轉)
+**B. Goto (無條件跳轉)**  
 * **VM 指令**: `goto labelName`
 * **功能**: 直接跳到指定標籤。
 * **Hack Assembly**:
@@ -110,7 +114,7 @@ VM 語言支援無條件跳轉和條件跳轉。
     0;JMP
     ```
 
-### C. If-goto (條件跳轉)
+**C. If-goto (條件跳轉)**  
 * **VM 指令**: `if-goto labelName`
 * **功能**: 從堆疊 **Pop** 一個數值。如果該數值 **不為 0 (True)**，則跳轉；否則繼續執行。
 * **Hack Assembly**:
@@ -124,11 +128,11 @@ VM 語言支援無條件跳轉和條件跳轉。
 
 ---
 
-## 3. 函式呼叫協定 (Function Calling Protocol)
+### 3. 函式呼叫協定 (Function Calling Protocol)
 
 這是本章的核心，必須精確實作「堆疊幀 (Stack Frame)」的管理。
 
-### A. Function (宣告函式)
+**A. Function (宣告函式)**   
 * **VM 指令**: `function f nVars`
     * `f`: 函式名稱。
     * `nVars`: 區域變數 (local variables) 的數量。
@@ -137,7 +141,7 @@ VM 語言支援無條件跳轉和條件跳轉。
     2.  因為區域變數尚未初始化，需將 `0` 推入堆疊 `nVars` 次 (初始化 LCL 區段)。
     3.  *(Hack 提示: 使用迴圈來 Push 0)*
 
-### B. Call (呼叫函式)
+**B. Call (呼叫函式)**   
 * **VM 指令**: `call f nArgs`
     * `nArgs`: 已經被 Push 到堆疊上的參數數量。
 * **實作步驟 (Caller 的責任)**:
@@ -152,7 +156,7 @@ VM 語言支援無條件跳轉和條件跳轉。
     8.  **Goto f**: 跳轉執行函式。
     9.  **宣告 (returnAddress)**: 放置第一步產生的 Label，這是函式回來後繼續執行的地方。
 
-### C. Return (函式返回)
+**C. Return (函式返回)**   
 * **VM 指令**: `return`
 * **實作步驟 (Callee 的責任)**:
     這步驟稱為 "Restoring the Frame" (恢復狀態)。
@@ -169,7 +173,7 @@ VM 語言支援無條件跳轉和條件跳轉。
 
 ---
 
-## 4. Bootstrap Code (啟動程式碼)
+### 4. Bootstrap Code (啟動程式碼)
 
 VM Translator 產生的 `.asm` 檔必須包含一段初始化的程式碼，這段程式碼必須放在輸出檔案的**最開頭**。
 
@@ -183,13 +187,13 @@ VM Translator 產生的 `.asm` 檔必須包含一段初始化的程式碼，這�
 
 ---
 
-## 5. 實作陷阱與提示 (Tips)
+### 5. 實作陷阱與提示 (Tips)
 
-### Label 的唯一性
+**Label 的唯一性**   
 * 在實作 `call` 指令時，產生的 Return Address Label 必須是**全域唯一**的。
 * **建議格式**: `Function$ret.i` (其中 `i` 為全域遞增的計數器)，例如 `Main.fibonacci$ret.1`。
 
-### Return 時的順序 (關鍵 bug 源)
+**Return 時的順序 (關鍵 bug 源)**   
 * 在 `return` 指令的實作中，**絕對不能**直接用 `LCL` 暫存器去進行減法計算 (如 `LCL - 5`)。
 * **原因**: 在還原 `ARG` 等指標的過程中，可能會覆蓋到 `LCL` 指向的記憶體區域 (特別是當參數很少時，Stack Frame 重疊的情況)。
 * **正確作法**:
@@ -197,15 +201,12 @@ VM Translator 產生的 `.asm` 檔必須包含一段初始化的程式碼，這�
     2.  取得 Return Address (`*(FRAME - 5)`) 並存入 `R14` (`RET`)。
     3.  後續所有的 restore 操作 (`THAT`, `THIS`, `ARG`, `LCL`) 都必須基於 `R13` (`FRAME`) 進行計算。
 
-### Sys.init 與測試
+**Sys.init 與測試**   
 * 所有的標準 VM 程式都預設從 `Sys.init` 開始執行。
 * 如果你的 Translator 沒有加入 Bootstrap code，像 `FibonacciElement` 這種跨檔案的複雜測試程式將無法運作。
 * **例外情況**: 在測試 `SimpleFunction` (Chapter 7 的測試腳本) 時，通常**不需要** Bootstrap。
     * *建議*: 設計一個 Command Line Argument (如 `--no-bootstrap`) 來控制是否寫入啟動碼。
-
-
-[作業](https://github.com/Luo051227/_co/tree/main/%E6%9C%9F%E6%9C%AB/8)
-`全部複製沒修改`[_nand2tetris/08/](https://github.com/ccc114a/cpu2os/tree/master/_nand2tetris/08)
+--- 
 # 第9章
 
 ## 1. 核心概念 (Overview)
