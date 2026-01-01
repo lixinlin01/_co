@@ -520,7 +520,7 @@ def compileWhile(self):
 
 ## 第11章
 
-**作業連結：** [第十一章]
+**作業連結：** [第十一章](https://github.com/lixinlin01/_co/tree/main/%E6%9C%9F%E6%9C%AB%E4%BD%9C%E6%A5%AD/11)
 **習題完成狀態：** 使用 jackCompiler
 **理解程度：** 部分理解 
 
@@ -712,6 +712,11 @@ call String.appendChar 2
 ```
 
 ## 第12章
+
+**作業連結：** [第十二章](https://github.com/lixinlin01/_co/tree/main/%E6%9C%9F%E6%9C%AB%E4%BD%9C%E6%A5%AD/12)
+**習題完成狀態：** 複製老師的
+**理解程度：** 不理解 
+
 ### 1. 核心概念 (Overview)
 這一章的目標是實作 Hack 電腦的 **System Software**。在前幾章我們在編譯器中假定 OS 已經存在 (例如呼叫 `Math.multiply`, `Memory.alloc`)，現在我們要親手實作這 8 個核心類別。
 
