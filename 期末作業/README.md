@@ -1,8 +1,9 @@
 # 期末作業(6~12章)
-**AI輔助學習：https://gemini.google.com/share/d0721e5d73eb**
+**AI輔助學習：https://gemini.google.com/share/d0721e5d73eb**  
+**理解程度：不理解、部分理解、大概理解、完全理解。**
 ## 第六章
 
-**作業連結：**  
+**作業連結：** [第六章](https://github.com/lixinlin01/_co/tree/main/%E6%9C%9F%E6%9C%AB%E4%BD%9C%E6%)  
 **習題完成狀態：** AI  
 **理解程度：** 大概理解  
 
@@ -53,3 +54,29 @@ Hack 語言支援三種符號，組譯器需透過**符號表 (Symbol Table)** �
     - 若是符號，查符號表。若符號表中不存在，則視為「新變數」，分配下一個可用的 RAM 地址 (從 16 開始)，並存入符號表。
   - 處理 C-指令：解析各欄位並查表轉換。
   - 將翻譯後的二進制碼寫入輸出檔案。
+
+---
+## 第七章
+
+**作業連結：** [第六章](https://github.com/lixinlin01/_co/tree/main/%E6%9C%9F%E6%9C%AB%E4%BD%9C%E6%)  
+**習題完成狀態：** 複製老師答案  
+**理解程度：** 大概理解 
+
+ ### 1. 堆疊運算 (Stack Arithmetic)原理
+ 堆疊是 VM 運作的核心，遵循「後進先出」(LIFO) 原則：  
+ - **Push (推入)**：將數據放入堆疊頂端。  
+ - **Pop (彈出)**：從堆疊頂端取出數據。  
+ - **運算方式**：例如執行加法時，VM 會從堆疊彈出兩個最頂端的數值（例如 y 和 x ），將其相加後再將結果推回堆疊頂端。  
+ - **支援的指令**：算術/邏輯：`add, sub, neg, and, or, not`。比較指令：`eq, gt, lt`。
+
+### 2. 記憶體段 (Memory Segments)
+為了處理不同的數據類型，VM 定義了八個虛擬記憶體段：  
+- 數據移動語法：  
+  - push segment index：將該位址的值推入堆疊。
+  - pop segment index：將堆疊頂端的值彈出並存入該位址。
+- 各段用途：
+  - `local, argument, this, that`：處理函數參數、局部變數及物件存取。
+  - `constant`：偽段 (Pseudo-segment)，用於獲取常數（如 push constant 5）。
+  - `static`：處理同一個檔內共享的靜態變數。
+  - `temp `：提供 8 個固定的臨時變數空間。
+  - `pointer`：用於存取 this 或 that 的基礎位址。
